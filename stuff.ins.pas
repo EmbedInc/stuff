@@ -45,6 +45,11 @@ const
   wav_chan_last_k = wav_chan_max_k - 1; {last allowed channel number in a WAV file}
 
 type
+{
+******************************
+*
+*   HTML file writing.
+}
   htm_out_t = record                   {state for writing to an HTML file}
     conn: file_conn_t;                 {I/O connection to output file}
     buf: string_var8192_t;             {buffered output data not yet written}
@@ -60,7 +65,11 @@ type
     ihn_flag_ownconn_k,                {we own CONN pointed to by CONN_P}
     ihn_flag_eof_k);                   {HEX file EOF record previously read}
   ihn_flag_t = set of ihn_flag_k_t;
-
+{
+******************************
+*
+*   Intel HEX file reading and writing.
+}
   ihex_in_t = record                   {state for reading Intel HEX file stream}
     conn_p: file_conn_p_t;             {pnt to connection to the text input stream}
     adrbase: sys_int_conv32_t;         {base address for adr in individual records}
@@ -89,7 +98,11 @@ type
     dat: ihex_dat_t;                   {buffered data values not yet written}
     flags: ihn_flag_t;                 {set of individual flags}
     end;
-
+{
+******************************
+*
+*   WAV file reading and writing.
+}
   wav_enc_k_t = (                      {WAV encoding formats}
     wav_enc_samp_k);                   {uncompressed samples at regular intervals}
 
@@ -158,6 +171,8 @@ type
     end;
   wav_out_p_t = ^wav_out_t;
 {
+******************************
+*
 *   Quoted printable encoded data handling.
 }
   qprflag_k_t = (                      {flags for reading quoted printable text}
@@ -174,7 +189,9 @@ type
     end;
   qprint_read_p_t = ^qprint_read_t;
 {
-*   CSV file handling.
+******************************
+*
+*   CSV file writing.
 }
   csv_in_p_t = ^csv_in_t;
   csv_in_t = record                    {data per CSV input file connection}
@@ -192,6 +209,8 @@ type
     open: boolean;                     {connection to CSV file is open}
     end;
 {
+******************************
+*
 *   List of name/value pairs.
 }
   nameval_ent_p_t = ^nameval_ent_t;
@@ -211,6 +230,8 @@ type
     memcr: boolean;                    {private memory context created}
     end;
 {
+******************************
+*
 *   Parts database structures.
 }
   partref_part_p_t = ^partref_part_t;
@@ -235,6 +256,8 @@ type
     nparts: sys_int_machine_t;         {number of entries in the list}
     end;
 {
+******************************
+*
 *   Entry points.
 }
 procedure csv_in_close (               {close CSV input file}

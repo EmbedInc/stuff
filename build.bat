@@ -6,18 +6,14 @@ setlocal
 set libname=stuff
 set srclib=stuff
 
-call src_get "%srclib%" %libname%.ins.pas
-call src_get "%srclib%" %libname%2.ins.pas
+call src_go %srclib%
 call src_getfrom sys sys.ins.pas
 call src_getfrom util util.ins.pas
 call src_getfrom string string.ins.pas
 call src_getfrom file file.ins.pas
+call src_insall %srclib% %libname%
 
-call src_get %srclib% %libname%.insall.pas
-sst %libname%.insall.pas -show_unused 0 -local_ins -ins %libname%.ins.pas
-copya %libname%.insall.c (cog)lib/%libname%.h
-del %libname%.insall.c
-
+call src_go %srclib%
 call src_pas %srclib% csv_in %1
 call src_pas %srclib% csv_out %1
 call src_pas %srclib% htm_out %1
