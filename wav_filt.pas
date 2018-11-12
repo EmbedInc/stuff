@@ -6,7 +6,7 @@ define wav_filt_init;
 define wav_filt_aa;
 define wav_filt_val;
 define wav_filt_samp_chan;
-%include '/cognivision_links/dsee_libs/progs/stuff2.ins.pas';
+%include 'stuff2.ins.pas';
 {
 ****************************************************************************
 *

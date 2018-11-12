@@ -5,7 +5,7 @@ define ihex_out_open_conn;
 define ihex_out_open_fnam;
 define ihex_out_byte;
 define ihex_out_close;
-%include '/cognivision_links/dsee_libs/progs/stuff2.ins.pas';
+%include 'stuff2.ins.pas';
 
 const
   maxdat_k = 32;                       {max data bytes allowed on one line}

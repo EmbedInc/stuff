@@ -8,7 +8,7 @@ define wav_in_samp_chan;
 define wav_in_samp;
 define wav_in_samp_mono;
 define wav_in_iterp_chan;
-%include '/cognivision_links/dsee_libs/progs/stuff2.ins.pas';
+%include 'stuff2.ins.pas';
 {
 *   Private routines used inside this module only.
 }

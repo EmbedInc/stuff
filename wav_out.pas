@@ -6,7 +6,7 @@ define wav_out_open_fnam;
 define wav_out_close;
 define wav_out_samp;
 define wav_out_samp_mono;
-%include '/cognivision_links/dsee_libs/progs/stuff2.ins.pas';
+%include 'stuff2.ins.pas';
 {
 *   Private routines used inside this module only.
 }
