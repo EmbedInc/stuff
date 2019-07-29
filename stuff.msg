@@ -590,25 +590,43 @@ msg bom_valstat_bad
 /*
 /*   Messages related to software installation issues.
 /*
-msg inst_ask_mplab
+msg inst_mplab_ask
   lan english -def
     Enter the name of a directory you think MPLAB is installed in.  To
     skip setting up your software to use MPLAB tools, enter nothing.
-msg inst_ask_c30
+msg inst_mplab_fail
   lan english -def
-    Enter the name of a directory you think the Microchip C30 compiler is
-    installed in.  To skip setting up your software to use C30, enter
-    nothing.
-msg inst_ask_msvc
+    MPLAB setup not installed.
+msg inst_mplab_found
   lan english -def
-    Enter the name of a directory you think the Microsoft Visual C++
-    (MSVC) version 6.0 compiler is installed in.  To skip setting up your
-    software to use MSVC, enter nothing.
-msg inst_ask_vstudio
+    Found MPLAB at "%p1s".
+
+msg inst_mplab16_ask
   lan english -def
-    Enter the name of a directory you think Visual Studio 98 got installed
-    to as part of the Visual C++ installation.  To skip setting up your
-    software to use Visual Studio, enter nothing.
+    Enter the name of a directory you think the Microchip 16 bit tools are
+    installed in.  To skip setting up your software to use the 16 bit
+    tools, enter nothing.
+msg inst_mplab16_fail
+  lan english -def
+    Microchip 16 bit tools setup not installed.
+msg inst_mplab16_found
+  lan english -def
+    Found the Microchip 16 bit tools at "%p1s".
+
+msg inst_msvc_fail
+  lan english -def
+    MSVC hooks not installed.
+msg inst_msvc_found
+  lan english -def
+    Found MSVC at "%p1s".
+
+msg inst_vstudio_fail
+  lan english -def
+    MS Visual Studio hooks not installed.
+msg inst_vstudio_found
+  lan english -def
+    Visual Studio 98 is at "%p1s".
+
 msg inst_dirs_mult
   lan english -def
     More than one possible installation directory was found:
@@ -616,30 +634,6 @@ msg inst_dirs_pick
   lan english -def
     Enter the number of the directory to use from the list above, or enter
     0 to search again.
-msg inst_mplab_fail
-  lan english -def
-    MPLAB setup not installed.
-msg inst_c30_fail
-  lan english -def
-    C30 compiler hooks not installed.
-msg inst_msvc_fail
-  lan english -def
-    MSVC hooks not installed.
-msg inst_vstudio_fail
-  lan english -def
-    MS Visual Studio hooks not installed.
-msg inst_mplab_found
-  lan english -def
-    Found MPLAB at "%p1s".
-msg inst_c30_found
-  lan english -def
-    Found C30 at "%p1s".
-msg inst_msvc_found
-  lan english -def
-    Found MSVC at "%p1s".
-msg inst_vstudio_found
-  lan english -def
-    Visual Studio 98 is at "%p1s".
 msg inst_nodirs
   lan english -def
     The target software was not found within this tree.
