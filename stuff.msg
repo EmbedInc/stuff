@@ -613,19 +613,38 @@ msg inst_mplab16_found
   lan english -def
     Found the Microchip 16 bit tools at "%p1s".
 
+msg inst_msvc_ask
+  lan english -def
+    Enter the name of a directory you think the Microsoft Visual Studio
+    build tools are installed in.  To skip setting up your software to use
+    MSVC tools, enter nothing.
+msg inst_msvc_bin_ask
+  lan english -def
+    Enter the name of a directory you think the Microsoft "Software
+    Development Kits" (SDKs) or "Windows Kits" are installed in.  This
+    step will find the linkable binary libraries required for building
+    Windows executalbes (EXEs).
+msg inst_msvc_bin_fail
+  lan english -def
+    Hooks to linkable libraries not installed.
+msg inst_msvc_debug0
+  lan english -def
+    Debugger not found.  Link to debugger not installed.
+msg inst_msvc_debugn
+  lan english -def
+    Multiple debugger executables found.  Link to debugger not installed.
 msg inst_msvc_fail
   lan english -def
     MSVC hooks not installed.
 msg inst_msvc_found
   lan english -def
     Found MSVC at "%p1s".
-
-msg inst_vstudio_fail
+msg inst_msvc_found_exe
   lan english -def
-    MS Visual Studio hooks not installed.
-msg inst_vstudio_found
+    Found the MSVC executables at "%p1s".
+msg inst_msvc_n_vcvars
   lan english -def
-    Visual Studio 98 is at "%p1s".
+    Unable to find the VCVARSALL.BAT file.  Hooks to MSVC not fully installed.
 
 msg inst_dirs_mult
   lan english -def
