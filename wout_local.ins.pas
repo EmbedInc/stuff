@@ -82,6 +82,11 @@
 *     Writes FP in engineering notation.  The FP value is written normalized to
 *     the engineering power of 1000, then a space, then the abbreviation for
 *     that power of 1000, then the UNIT string.
+*
+*   WFP (FP, ND)
+*
+*     Write the floating point value FP with ND digits right of the decimal
+*     point.
 }
 type
   wbyte_array_t = array[0..1] of int8u_t;
@@ -585,4 +590,28 @@ begin
   if u.len > 0 then begin
     write (u.str:u.len);
     end;
+  end;
+{
+********************************************************************************
+*
+*   Subroutine WFP (FP, ND)
+*
+*   Write the floating point value FP with ND digits right of the decimal point.
+}
+procedure wfp (                        {write floating point value}
+  in      fp: real;                    {the floating point value to write}
+  in      nd: sys_int_machine_t);      {number of digits right of decimal point}
+  val_param;
+
+var
+  tk: string_var32_t;                  {output string}
+
+begin
+  tk.max := size_char(tk.str);         {init local var string}
+
+  string_f_fp_fixed (                  {make fixed point string}
+    tk,                                {output string}
+    fp,                                {input value}
+    nd);                               {digits right of decimal point}
+  write (tk.str:tk.len);               {write the string to the output}
   end;
