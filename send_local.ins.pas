@@ -192,12 +192,12 @@ procedure sendw (                      {send 16 bit word to remote unit}
 begin
   if send_local.high_low
     then begin
-      sendb (rshft(w, 8));                 {send the high byte}
-      sendb (w);                           {send the low byte}
+      sendb (rshft(w, 8));             {send the high byte}
+      sendb (w);                       {send the low byte}
       end
     else begin
-      sendb (w);                           {send the low byte}
-      sendb (rshft(w, 8));                 {send the high byte}
+      sendb (w);                       {send the low byte}
+      sendb (rshft(w, 8));             {send the high byte}
       end
     ;
   end;

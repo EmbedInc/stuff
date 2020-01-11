@@ -6,7 +6,7 @@ define qprint_read_open_conn;
 define qprint_read_getline;
 define qprint_read_char;
 define qprint_read_close;
-%include '(cog)dsee_libs/progs/stuff2.ins.pas';
+%include 'stuff2.ins.pas';
 
 const
   cr = 13;                             {carriage return character code}
