@@ -56,6 +56,11 @@
 *
 *     Returns floating point value of next token.
 *
+*   NEXT_RAW (TK)
+*
+*     Returns the remainder of the input line as a raw string.  The input line
+*     is always exhausted by this routine.
+*
 *   NOT_EOS
 *
 *     Returns TRUE iff INBUF not exhausted.
@@ -378,5 +383,23 @@ begin
     if sys_error(stat) then return;    {conversion error ?}
     ar[ind] := hval;                   {stuff this byte into the array}
     nb := nb + 1;                      {count one more byte returned}
+    end;
+  end;
+{
+********************************************************************************
+*
+*   Subroutine NEXT_RAW (TK)
+*
+*   Get the remainder of the input line as a raw string.
+}
+procedure next_raw (                   {get rest of line as raw string}
+  in out  tk: univ string_var_arg_t);  {the returned string}
+  val_param; internal;
+
+begin
+  tk.len := 0;                         {init the returned string to empty}
+  while p <= inbuf.len do begin        {loop over all the remaining characters}
+    string_append1 (tk, inbuf.str[p]);
+    p := p + 1;
     end;
   end;
