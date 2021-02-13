@@ -601,11 +601,23 @@ msg inst_mplab_found
   lan english -def
     Found MPLAB at "%p1s".
 
+msg inst_mplab8_ask
+  lan english -def
+    Enter the name of a directory you think the Microchip 8 bit tools
+    (XC8) are installed in.  To skip setting up your software to use the
+    XC8 tools, enter nothing.
+msg inst_mplab8_fail
+  lan english -def
+    Microchip 8 bit tools setup not installed.
+msg inst_mplab8_found
+  lan english -def
+    Found the Microchip 8 bit tools at "%p1s".
+
 msg inst_mplab16_ask
   lan english -def
-    Enter the name of a directory you think the Microchip 16 bit tools are
-    installed in.  To skip setting up your software to use the 16 bit
-    tools, enter nothing.
+    Enter the name of a directory you think the Microchip 16 bit tools
+    (XC16) are installed in.  To skip setting up your software to use the
+    16 bit tools, enter nothing.
 msg inst_mplab16_fail
   lan english -def
     Microchip 16 bit tools setup not installed.
