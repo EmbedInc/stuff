@@ -569,6 +569,9 @@ msg bom_infile_bad
   lan english -def
     The input file is not of the correct format.  Use the latest version
     of the Eagle ULP PARTS_CSV to produce the input file.
+msg bom_is_bad
+  lan english -def
+    Invalid IS attribute of "%p1s" found for part %p2s.
 msg bom_nbom
   lan english -def
     %p1i unique BOM parts found.
