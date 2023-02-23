@@ -4,8 +4,6 @@ htm_out.obj
 ihex.obj
 ihex_out.obj
 nameval.obj
-partref.obj
-partref_read_csv.obj
 qprint_read.obj
 wav_filt.obj
 wav_in.obj

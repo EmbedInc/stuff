@@ -35,7 +35,6 @@ const
   stuff_stat_wavenc_k = 24;            {unrecognized WAV encoding format}
   stuff_stat_wavencr_k = 25;           {requested WAV encoding is not supported}
   stuff_stat_mail_relay_k = 26;        {client tried to relay mail thru us}
-  stuff_stat_partref_orgovfl_k = 27;   {too many organizations with private part nums}
   stuff_stat_ihex_eof_k = 28;          {end of HEX file before HEX EOF record}
   stuff_stat_csvfield_null_k = 29;     {CSV field is empty}
 {
@@ -228,32 +227,6 @@ type
     last_p: nameval_ent_p_t;           {points to last list entry}
     nents: sys_int_machine_t;          {number of entries in the list}
     memcr: boolean;                    {private memory context created}
-    end;
-{
-******************************
-*
-*   Parts database structures.
-}
-  partref_part_p_t = ^partref_part_t;
-  partref_part_t = record              {one reference part in list of ref parts}
-    prev_p: partref_part_p_t;          {points to previous list entry}
-    next_p: partref_part_p_t;          {points to next list entry}
-    desc: string_var80_t;              {description string}
-    value: string_var80_t;             {value string}
-    package: string_var32_t;           {package description string}
-    subst_set: boolean;                {SUBST field has been set}
-    subst: boolean;                    {substitutions allowed, TRUE when not set}
-    inhouse: nameval_list_t;           {list of organizations with their part numbers}
-    manuf: nameval_list_t;             {list of manufacturers with their part numbers}
-    supplier: nameval_list_t;          {list of suppliers with their part numbers}
-    end;
-
-  partref_list_p_t = ^partref_list_t;
-  partref_list_t = record              {list of reference part definitions}
-    mem_p: util_mem_context_p_t;       {points to dynamic memory context for list}
-    first_p: partref_part_p_t;         {points to first list entry}
-    last_p: partref_part_p_t;          {points to last list entry}
-    nparts: sys_int_machine_t;         {number of entries in the list}
     end;
 {
 ******************************
@@ -569,31 +542,6 @@ procedure nameval_set_value (          {set value in name/value list entry}
   in      list: nameval_list_t;        {the list the entry is associated with}
   out     ent: nameval_ent_t;          {the entry to set the value of}
   in      value: univ string_var_arg_t); {the value to write into the entry}
-  val_param; extern;
-
-procedure partref_list_del (           {deallocate resources of reference parts list}
-  in out  list: partref_list_t);       {list to deallocate resources of, will be invalid}
-  val_param; extern;
-
-procedure partref_list_init (          {initialize list of reference part definitions}
-  out     list: partref_list_t;        {the list to initialize}
-  in out  mem: util_mem_context_t);    {parent memory context, will create subordinate}
-  val_param; extern;
-
-procedure partref_part_add_end (       {add part to end of reference parts list}
-  in out  list: partref_list_t;        {the list to add the part to}
-  in      part_p: partref_part_p_t);   {poiner to the part to add}
-  val_param; extern;
-
-procedure partref_part_new (           {create and initialize new partref list entry}
-  in      list: partref_list_t;        {the list the entry will be part of}
-  out     part_p: partref_part_p_t);   {returned pointer to the new entry, not linked}
-  val_param; extern;
-
-procedure partref_read_csv (           {add parts from CSV file to partref list}
-  in out  list: partref_list_t;        {the list to add parts to}
-  in      csvname: univ string_var_arg_t; {CSV file name, ".csv" suffix may be omitted}
-  out     stat: sys_err_t);
   val_param; extern;
 
 procedure qprint_read_char (           {decode next char from quoted printable strm}

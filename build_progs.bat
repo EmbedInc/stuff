@@ -7,4 +7,4 @@ rem
 setlocal
 call build_pasinit
 
-call src_prog %srcdir% test_partref %1
+rem src_progl test_stuff

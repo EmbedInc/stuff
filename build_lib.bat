@@ -15,8 +15,6 @@ call src_pas %srcdir% htm_out %1
 call src_pas %srcdir% ihex %1
 call src_pas %srcdir% ihex_out %1
 call src_pas %srcdir% nameval %1
-call src_pas %srcdir% partref %1
-call src_pas %srcdir% partref_read_csv %1
 call src_pas %srcdir% qprint_read %1
 call src_pas %srcdir% wav_filt %1
 call src_pas %srcdir% wav_in %1
