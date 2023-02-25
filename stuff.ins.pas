@@ -256,6 +256,12 @@ procedure csv_in_field_str (           {read next field from current CSV input l
   out     stat: sys_err_t);            {completion status}
   val_param; extern;
 
+procedure csv_in_field_strn (          {read next CSV field, no EOS error}
+  in out  cin: csv_in_t;               {CSV file reading state}
+  in out  str: univ string_var_arg_t;  {returned field contents, empty on EOS}
+  out     stat: sys_err_t);            {completion status}
+  val_param; extern;
+
 procedure csv_in_line (                {read next line from CSV file}
   in out  cin: csv_in_t;               {CSV file reading state}
   out     stat: sys_err_t);            {completion status}

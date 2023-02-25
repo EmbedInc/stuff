@@ -5,6 +5,7 @@ define csv_in_open;
 define csv_in_close;
 define csv_in_line;
 define csv_in_field_str;
+define csv_in_field_strn;
 define csv_in_field_int;
 define csv_in_field_fp;
 define csvfield_null;
@@ -123,6 +124,28 @@ procedure csv_in_field_str (           {read next field from current CSV input l
 begin
   string_token_comma (cin.buf, cin.p, str, stat); {get the next field contents}
   cin.field := cin.field + 1;          {update number of last field read this line}
+  end;
+{
+********************************************************************************
+*
+*   Subroutine CSV_IN_FIELD_STRN (CIN, STR, STAT)
+*
+*   Read the contents of the next field in the current input line and return it
+*   in STR.  If the end of the current input line is encountered instead of
+*   another field, then STR is returned the empty string and STAT indicating no
+*   error.
+}
+procedure csv_in_field_strn (          {read next CSV field, no EOS error}
+  in out  cin: csv_in_t;               {CSV file reading state}
+  in out  str: univ string_var_arg_t;  {returned field contents, empty on EOS}
+  out     stat: sys_err_t);            {completion status}
+  val_param;
+
+begin
+  csv_in_field_str (cin, str, stat);   {try to get next field contents}
+  if string_eos(stat) then begin       {hit end of line instead ?}
+    str.len := 0;
+    end;
   end;
 {
 ********************************************************************************
