@@ -194,6 +194,7 @@ type
 }
   csv_in_p_t = ^csv_in_t;
   csv_in_t = record                    {data per CSV input file connection}
+    mem_p: util_mem_context_p_t;       {to private mem context}
     conn: file_conn_t;                 {connection to the file, open for text read}
     buf: string_var8192_t;             {one line input buffer}
     p: string_index_t;                 {input line parse index}
@@ -269,6 +270,7 @@ procedure csv_in_line (                {read next line from CSV file}
 
 procedure csv_in_open (                {open CSV input file}
   in      fnam: univ string_var_arg_t; {CSV file name, ".csv" suffix may be omitted}
+  in out  mem: util_mem_context_t;     {parent mem context, will create child}
   out     cin: csv_in_t;               {returned CSV reading state}
   out     stat: sys_err_t);            {completion status}
   val_param; extern;

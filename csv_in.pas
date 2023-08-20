@@ -17,22 +17,34 @@ define csvfield_null;
 {
 ********************************************************************************
 *
-*   Subroutine CSV_IN_OPEN (FNAM, CIN, STAT)
+*   Subroutine CSV_IN_OPEN (FNAM, MEM, CIN, STAT)
 *
 *   Open a CSV file for reading.  FNAM is the name of the CSV file.  The
-*   mandatory ".csv" file name suffix may be omitted from FNAM.  CIN is returned
-*   the CSV file reading state.  It will be completely initialized.  No
-*   assumption is made about its previous state.
+*   mandatory ".csv" file name suffix may be omitted from FNAM.  MEM is the
+*   parent memory context under which to create the subordinate context for this
+*   reading of the CSV file.  CIN is returned the CSV file reading state.  It
+*   will be completely initialized.  No assumption is made about its previous
+*   state.
 }
 procedure csv_in_open (                {open CSV input file}
   in      fnam: univ string_var_arg_t; {CSV file name, ".csv" suffix may be omitted}
+  in out  mem: util_mem_context_t;     {parent mem context, will create child}
   out     cin: csv_in_t;               {returned CSV reading state}
   out     stat: sys_err_t);            {completion status}
   val_param;
 
 begin
+  cin.open := false;                   {init to CSV file is not open}
+  cin.mem_p := nil;                    {init to private mem context not exist}
+
   file_open_read_text (fnam, '.csv', cin.conn, stat); {open the file}
   if sys_error(stat) then return;
+
+  util_mem_context_get (mem, cin.mem_p); {create private mem context}
+  if util_mem_context_err (cin.mem_p, stat) then begin
+    file_close (cin.conn);
+    return;
+    end;
 
   cin.buf.max := size_char(cin.buf.str);
   cin.buf.len := 0;
@@ -64,6 +76,10 @@ begin
 
   file_close (cin.conn);               {close the connection to the file}
   cin.open := false;                   {indicate no file open}
+
+  if cin.mem_p <> nil then begin
+    util_mem_context_del (cin.mem_p);  {delete private mem context, returned NIL}
+    end;
   end;
 {
 ********************************************************************************
