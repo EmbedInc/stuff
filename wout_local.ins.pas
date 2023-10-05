@@ -91,9 +91,15 @@
 type
   wbyte_array_t = array[0..1] of int8u_t;
 
+  wout_proc_p_t = ^procedure;
+
 var
   wrlock: sys_sys_threadlock_t;        {lock for writing to standard output}
   newline: boolean;                    {STDOUT stream is at start of new line}
+  lockout_p: wout_proc_p_t;            {to externally supplied LOCKOUT routine}
+  unlockout_p: wout_proc_p_t;          {to externally supplied UNLOCKOUT routine}
+  wout_atnew_p: wout_proc_p_t;         {to externally supplied WOUT_ATNET routine}
+  wout_notnew_p: wout_proc_p_t;        {to externally supplied WOUT_NOTNEW routine}
 {
 ********************************************************************************
 *
@@ -112,6 +118,10 @@ begin
   sys_thread_lock_create (wrlock, stat); {create interlock for writing to STDOUT}
   sys_error_abort (stat, '', '', nil, 0);
   newline := true;
+  lockout_p := nil;
+  unlockout_p := nil;
+  wout_atnew_p := nil;
+  wout_notnew_p := nil;
   end;
 {
 ********************************************************************************
@@ -125,6 +135,11 @@ procedure wout_atnew;                  {STD out is at the start of a new line}
   val_param;
 
 begin
+  if wout_atnew_p <> nil then begin    {routine externally supplied ?}
+    wout_atnew_p^;                     {call the external routine}
+    return;
+    end;
+
   newline := true;
   end;
 {
@@ -138,6 +153,11 @@ procedure wout_notnew;                 {STD out is not at the start of a new lin
   val_param;
 
 begin
+  if wout_notnew_p <> nil then begin   {routine externally supplied ?}
+    wout_notnew_p^;                    {call the external routine}
+    return;
+    end;
+
   newline := false;
   end;
 {
@@ -153,6 +173,11 @@ procedure lockout;
   val_param;
 
 begin
+  if lockout_p <> nil then begin       {routine externally supplied ?}
+    lockout_p^;                        {call the external routine}
+    return;
+    end;
+
   sys_thread_lock_enter (wrlock);
   if not newline then writeln;         {start on a new line}
   newline := true;                     {init to STDOUT will be at start of line}
@@ -168,6 +193,11 @@ procedure unlockout;
   val_param;
 
 begin
+  if unlockout_p <> nil then begin     {routine externally supplied ?}
+    unlockout_p^;                      {call the external routine}
+    return;
+    end;
+
   sys_thread_lock_leave (wrlock);
   end;
 {
