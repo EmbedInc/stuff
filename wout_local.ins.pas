@@ -506,9 +506,11 @@ begin
 }
   string_append1 (s, ' ');
   case ii of                           {check for special characters to show}
+6:  string_appendn (s, 'ACK', 3);      {ACK}
 7:  string_appendn (s, 'Bel', 3);      {bell}
 10: string_appendn (s, ' LF', 3);      {carriage return}
 13: string_appendn (s, ' CR', 3);      {line feed}
+21: string_appendn (s, 'NAK', 3);      {NACK}
 255: string_appendn (s, 'Rub', 3);     {rub out}
 otherwise
     if ii < 32
