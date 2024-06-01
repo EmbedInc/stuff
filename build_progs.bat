@@ -1,6 +1,6 @@
 @echo off
 rem
-rem   BUILD_PROGS [-dbg]
+rem   BUILD_PROGS
 rem
 rem   Build the executable programs from this source directory.
 rem

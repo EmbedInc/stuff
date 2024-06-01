@@ -13,12 +13,7 @@ call :dolocal send_local.ins.pas
 call :dolocal whtm_local.ins.pas
 call :dolocal wout_local.ins.pas
 
-call src_go %srcdir%
-call src_getfrom sys base.ins.pas
-call src_getfrom sys sys.ins.pas
-call src_getfrom util util.ins.pas
-call src_getfrom string string.ins.pas
-call src_getfrom file file.ins.pas
+call src_getbase
 
 goto :eof
 
