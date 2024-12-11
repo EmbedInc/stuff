@@ -170,7 +170,7 @@ procedure sendb (                      {send byte to remote unit}
   val_param;
 
 begin
-  string_append1 (outbuf, chr(b));     {add byte to end of output buffer}
+  string_append1 (outbuf, chr(b & 16#FF)); {add byte to end of output buffer}
 
   if outbuf.len >= outbuf.max then begin {the buffer just filled up ?}
     sendall;                           {send the full buffer now, reset buffer to empty}
